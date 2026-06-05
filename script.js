@@ -1,3 +1,16 @@
+const STRIPE_PUBLISHABLE_KEY = ''; // Collez votre clé pk_test_... Stripe ici pour activer le paiement CB
+
+const ASSETS = {
+  logo: 'Logopetitbordey.png',
+  heroBanner: 'banniere-piment-1.png',
+  atelier: 'CuisineBordey.png'
+};
+
+/** Encode les chemins pour GitHub Pages (espaces, accents, casse) */
+function assetPath(path) {
+  if (!path) return '';
+  return path.split('/').map(part => encodeURIComponent(part)).join('/');
+}
 const CATEGORIES = [
   { id: 'boudins',  label: 'Boudins',  icon: '🌭', desc: 'Recettes familiales, textures parfaites et épices maison.' },
   { id: 'samoussa', label: 'Samoussas', icon: '🥟', desc: 'Feuilletés croustillants, farcis avec amour.' },
@@ -37,10 +50,17 @@ window.CATEGORIES = CATEGORIES;
 function formatPrice(n) { return n.toFixed(2) + '€'; }
 
 function productCardHTML(p, index) {
+  const fallback = {
+    boudins: 'images/product-boudin.svg',
+    samoussa: 'images/product-condiment.svg',
+    accras: 'images/product-sauce.svg',
+    sauce: 'images/product-piment.svg'
+  }[p.category] || 'images/product-condiment.svg';
+
   return `
     <article class="product-card reveal" style="--delay:${index * 0.07}s" data-id="${p.id}">
       <div class="product-visual">
-        <img src="${p.img}" alt="${p.title}" loading="lazy"/>
+        <img src="${assetPath(p.img)}" alt="${p.title}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'"/>
         <div class="product-visual-shine"></div>
         <span class="product-badge">Artisanal</span>
       </div>
@@ -230,6 +250,141 @@ function pulseCart() {
   }
 }
 
+function initCheckout() {
+  const summaryEl = document.getElementById('order-summary');
+  const totalEl = document.getElementById('total-amount');
+  const emptyBlock = document.getElementById('checkout-empty');
+  const checkoutMain = document.getElementById('checkout-main');
+  if (!summaryEl) return;
+
+  const cartData = JSON.parse(localStorage.getItem('lpb_cart') || '{}');
+  const ids = Object.keys(cartData).filter(id => cartData[id] > 0);
+
+  if (!ids.length) {
+    if (emptyBlock) emptyBlock.hidden = false;
+    if (checkoutMain) checkoutMain.hidden = true;
+    summaryEl.innerHTML = '';
+    if (totalEl) totalEl.textContent = '0,00€';
+    return;
+  }
+
+  if (emptyBlock) emptyBlock.hidden = true;
+  if (checkoutMain) checkoutMain.hidden = false;
+
+  let total = 0;
+  summaryEl.innerHTML = '';
+  ids.forEach(id => {
+    const qty = cartData[id];
+    const product = PRODUCTS.find(p => p.id === id);
+    if (!product) return;
+    total += product.price * qty;
+    const line = document.createElement('div');
+    line.className = 'order-line';
+    line.innerHTML = `<span>${product.title} <em>×${qty}</em></span><strong>${formatPrice(product.price * qty)}</strong>`;
+    summaryEl.appendChild(line);
+  });
+  if (totalEl) totalEl.textContent = formatPrice(total);
+
+  initPaymentForm(total, cartData);
+}
+
+function initPaymentForm(total, cartData) {
+  const stripeContainer = document.getElementById('stripe-payment');
+  const manualContainer = document.getElementById('manual-payment');
+  const form = document.getElementById('checkout-form');
+  if (!form) return;
+
+  const hasStripe = STRIPE_PUBLISHABLE_KEY.startsWith('pk_');
+
+  if (hasStripe && typeof Stripe !== 'undefined') {
+    try {
+      const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+      const elements = stripe.elements();
+      const cardElement = elements.create('card', {
+        style: {
+          base: { fontSize: '16px', color: '#222', '::placeholder': { color: '#999' } }
+        }
+      });
+      cardElement.mount('#card-element');
+      if (stripeContainer) stripeContainer.hidden = false;
+      if (manualContainer) manualContainer.hidden = true;
+
+      cardElement.on('change', e => {
+        const err = document.getElementById('card-errors');
+        if (err) err.textContent = e.error ? e.error.message : '';
+      });
+
+      form._stripe = { stripe, cardElement };
+    } catch (err) {
+      console.warn('Stripe indisponible, mode manuel activé.', err);
+      if (stripeContainer) stripeContainer.hidden = true;
+      if (manualContainer) manualContainer.hidden = false;
+    }
+  } else {
+    if (stripeContainer) stripeContainer.hidden = true;
+    if (manualContainer) manualContainer.hidden = false;
+  }
+
+  if (form._checkoutWired) return;
+  form._checkoutWired = true;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const feedback = document.getElementById('checkout-feedback');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Traitement…';
+    if (feedback) { feedback.textContent = ''; feedback.className = 'form-feedback'; }
+
+    const formData = new FormData(form);
+    const customer = {
+      name: formData.get('customer_name'),
+      email: formData.get('customer_email'),
+      phone: formData.get('customer_phone'),
+      address: formData.get('customer_address')
+    };
+
+    if (form._stripe) {
+      const { stripe, cardElement } = form._stripe;
+      const { token, error } = await stripe.createToken(cardElement, { name: customer.name });
+      if (error) {
+        const errEl = document.getElementById('card-errors');
+        if (errEl) errEl.textContent = error.message;
+        btn.disabled = false;
+        btn.textContent = originalText;
+        return;
+      }
+      if (token) completeOrder(customer, cartData, total, feedback, btn, originalText);
+      return;
+    }
+
+    completeOrder(customer, cartData, total, feedback, btn, originalText);
+  });
+}
+
+function completeOrder(customer, cartData, total, feedback, btn, originalText) {
+  const orderLines = Object.keys(cartData).map(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    return p ? `${p.title} ×${cartData[id]} — ${formatPrice(p.price * cartData[id])}` : '';
+  }).filter(Boolean).join('\n');
+
+  localStorage.removeItem('lpb_cart');
+  cart = {};
+  renderCart();
+
+  if (feedback) {
+    feedback.textContent = `Commande confirmée ! Un email récapitulatif sera envoyé à ${customer.email}. Merci !`;
+    feedback.className = 'form-feedback success';
+  }
+
+  btn.textContent = 'Commande confirmée ✓';
+
+  setTimeout(() => {
+    window.location.href = 'index.html?order=confirmed';
+  }, 2500);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const shopSections = document.getElementById('shop-sections');
   const shopGrid = document.getElementById('shop-grid');
@@ -249,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategoryNav();
   initScrollReveal();
   initContactForm();
+  initCheckout();
 
   const navToggle = document.getElementById('nav-toggle');
   const mainNav = document.getElementById('main-nav');
@@ -283,6 +439,13 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.add('hero-animate');
     el.style.animationDelay = (0.15 + i * 0.12) + 's';
   });
+
+  document.querySelectorAll('[data-asset]').forEach(el => {
+    const key = el.dataset.asset;
+    if (ASSETS[key]) el.src = assetPath(ASSETS[key]);
+  });
+
+  renderCart();
 });
 
 let cart = JSON.parse(localStorage.getItem('lpb_cart') || '{}');
@@ -368,6 +531,7 @@ document.addEventListener('click', e => {
 
   if (t?.id === 'checkout') {
     if (Object.keys(cart).length === 0) { alert('Votre panier est vide.'); return; }
+    saveCart();
     window.location.href = 'checkout.html';
   }
 });
@@ -381,5 +545,3 @@ if (darkToggle) {
     darkToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
   });
 }
-
-renderCart();

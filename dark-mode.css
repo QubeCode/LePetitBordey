@@ -225,6 +225,23 @@ body.dark-mode .dark-mode-toggle {
   color: #18130d;
 }
 
+body.dark-mode .payment-info-box {
+  background: rgba(46,94,59,0.12);
+  border-color: rgba(212,175,55,0.2);
+}
+
+body.dark-mode .checkout-form input,
+body.dark-mode .checkout-form textarea {
+  background: rgba(40,35,30,0.8);
+  border-color: rgba(212,175,55,0.2);
+  color: #e8e3da;
+}
+
+body.dark-mode .checkout-empty {
+  background: rgba(28,25,22,0.95);
+  border-color: rgba(212,175,55,0.15);
+}
+
 @media (max-width: 480px) {
   .dark-mode-toggle {
     bottom: 16px;

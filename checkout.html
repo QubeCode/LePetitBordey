@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Paiement Sécurisé — Le Petit Bordey</title>
+  <title>Paiement — Le Petit Bordey</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./dark-mode.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.html">
-        <img src="logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
+        <img data-asset="logo" src="Logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
@@ -24,19 +24,24 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier</button>
+        <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier (<span id="cart-count">0</span>)</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="section">
+    <section class="section checkout-page">
       <div class="wrap">
-        <h1>Paiement Sécurisé</h1>
+        <h1>Finaliser ma commande</h1>
 
-        <div class="checkout-grid">
+        <div id="checkout-empty" class="checkout-empty" hidden>
+          <p>Votre panier est vide.</p>
+          <a href="boutique.html" class="btn primary">Retour à la boutique</a>
+        </div>
+
+        <div id="checkout-main" class="checkout-grid">
           <div class="checkout-summary">
-            <h2>Résumé de commande</h2>
+            <h2>Résumé</h2>
             <div id="order-summary" class="order-summary-box"></div>
             <div class="order-total">
               Total : <span id="total-amount">0€</span>
@@ -44,17 +49,42 @@
           </div>
 
           <div class="checkout-payment">
-            <h3>Formulaire de paiement</h3>
-            <form id="payment-form">
-              <div id="card-element" class="card-element"></div>
-              <div id="card-errors" role="alert" class="card-errors"></div>
+            <h3>Vos coordonnées & paiement</h3>
+            <div id="checkout-feedback" class="form-feedback" role="status"></div>
+
+            <form id="checkout-form" class="checkout-form">
+              <div class="form-row">
+                <label>Nom complet
+                  <input type="text" name="customer_name" required placeholder="Jean Dupont" autocomplete="name">
+                </label>
+                <label>Téléphone
+                  <input type="tel" name="customer_phone" required placeholder="06 00 00 00 00" autocomplete="tel">
+                </label>
+              </div>
+              <label>Email
+                <input type="email" name="customer_email" required placeholder="vous@email.com" autocomplete="email">
+              </label>
+              <label>Adresse de livraison
+                <textarea name="customer_address" required rows="2" placeholder="Adresse, code postal, ville"></textarea>
+              </label>
+
+              <div id="stripe-payment" hidden>
+                <p class="payment-label">Carte bancaire</p>
+                <div id="card-element" class="card-element"></div>
+                <div id="card-errors" role="alert" class="card-errors"></div>
+              </div>
+
+              <div id="manual-payment">
+                <div class="payment-info-box">
+                  <p><strong>Paiement à la livraison ou sur place</strong></p>
+                  <p class="muted">Confirmez votre commande — nous vous recontacterons pour organiser le paiement et la livraison.</p>
+                </div>
+              </div>
+
               <button type="submit" id="submit-btn" class="btn primary checkout-submit">
-                Payer maintenant
+                Confirmer ma commande
               </button>
             </form>
-            <p class="checkout-note">
-              Clés de test Stripe — ne pas utiliser pour paiements réels.
-            </p>
           </div>
         </div>
       </div>
@@ -71,52 +101,6 @@
 
   <button class="dark-mode-toggle" id="dark-toggle" aria-label="Basculer mode sombre">🌙</button>
 
-  <script src="./script.js"></script>
-  <script>
-    const stripe = Stripe('pk_test_51234567890abcdef');
-    const elements = stripe.elements();
-    const cardElement = elements.create('card');
-    cardElement.mount('#card-element');
-
-    const cart = JSON.parse(localStorage.getItem('lpb_cart') || '{}');
-    const PRODUCTS = window.PRODUCTS || [];
-
-    let total = 0;
-    const summary = document.getElementById('order-summary');
-    Object.keys(cart).forEach(id => {
-      const qty = cart[id];
-      const product = PRODUCTS.find(p => p.id === id);
-      if(!product) return;
-      const line = document.createElement('div');
-      line.className = 'order-line';
-      line.innerHTML = `<span>${product.title} x${qty}</span><strong>${(product.price * qty).toFixed(2)}€</strong>`;
-      summary.appendChild(line);
-      total += product.price * qty;
-    });
-    document.getElementById('total-amount').textContent = total.toFixed(2) + '€';
-
-    const form = document.getElementById('payment-form');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = document.getElementById('submit-btn');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Traitement...';
-
-      const { token } = await stripe.createToken(cardElement);
-      if(token) {
-        alert('Paiement simulé réussi !\nToken: ' + token.id + '\n\nEn production, envoyer ce token à votre serveur pour traitement.');
-        localStorage.removeItem('lpb_cart');
-        setTimeout(() => window.location.href = 'index.html', 2000);
-      } else {
-        document.getElementById('card-errors').textContent = 'Erreur lors du paiement. Vérifiez vos données.';
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Payer maintenant';
-      }
-    });
-
-    cardElement.addEventListener('change', (event) => {
-      document.getElementById('card-errors').textContent = event.error ? event.error.message : '';
-    });
-  </script>
+  <script src="./script.js" defer></script>
 </body>
 </html>
