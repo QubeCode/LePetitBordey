@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="400" height="200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E6B800"/>
+      <stop offset="50%" stop-color="#D4A017"/>
+      <stop offset="100%" stop-color="#AA8C2C"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer border -->
+  <ellipse cx="400" cy="200" rx="350" ry="160" fill="none" stroke="url(#goldGrad)" stroke-width="8"/>
+  <ellipse cx="400" cy="200" rx="330" ry="145" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Inner laurel/wreath crown -->
+  <g transform="translate(400, 80)">
+    <!-- Left leaf -->
+    <path d="M -30 0 Q -40 -10 -45 -20" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+    <!-- Center flame -->
+    <path d="M -10 -5 Q 0 -25 10 -5 Q 5 -15 0 -20 Q -5 -15 -10 -5" fill="url(#goldGrad)"/>
+    <!-- Right leaf -->
+    <path d="M 30 0 Q 40 -10 45 -20" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text: Le Petit Bordey -->
+  <text x="400" y="220" font-family="'Georgia', 'Playfair Display', serif" font-size="72" font-weight="600" fill="url(#goldGrad)" text-anchor="middle" font-style="italic" letter-spacing="1">
+    Le Petit Bordey
+  </text>
+</svg>
