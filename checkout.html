@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Paiement Sécurisé — Le Petit Bordey</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dark-mode.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><img src="images/logo.svg" alt="Le Petit Bordey" class="logo-img" style="height:50px"/></a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="wrap">
+        <h1>Paiement Sécurisé</h1>
+        
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:32px;margin-top:24px">
+          <div>
+            <h2>Résumé de commande</h2>
+            <div id="order-summary" style="background:#f7f1e6;padding:20px;border-radius:12px;margin:16px 0;border:1px solid #ddd">
+              <!-- Items listed here -->
+            </div>
+            <div style="font-size:1.2rem;font-weight:700;text-align:right;padding:16px;border-top:2px solid #2E5E3B">
+              Total : <span id="total-amount">0€</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;padding:24px;border-radius:12px;border:1px solid #ddd;height:fit-content">
+            <h3>Formulaire de paiement</h3>
+            <form id="payment-form">
+              <div id="card-element" style="border:1px solid #ddd;padding:10px;border-radius:6px;margin:16px 0"></div>
+              <div id="card-errors" role="alert" style="color:#dc3545;font-size:0.9rem;margin:12px 0"></div>
+              <button type="submit" id="submit-btn" class="btn primary" style="width:100%;margin-top:16px">
+                Payer maintenant
+              </button>
+            </form>
+            <p style="font-size:0.85rem;color:#666;margin-top:16px;text-align:center">
+              Clés de test Stripe — ne pas utiliser pour paiements réels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="brand-col"><div class="logo">Le Petit Bordey</div><p class="muted">Tradition • Famille • Artisanat</p></div>
+      <nav class="foot-nav"><a href="index.html#about">Notre Histoire</a></nav>
+      <div class="legal"><a href="#">Mentions légales</a></div>
+    </div>
+  </footer>
+
+  <button class="dark-mode-toggle" id="dark-toggle" aria-label="Basculer mode sombre">🌙</button>
+
+  <script src="./script.js"></script>
+  <script>
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_51234567890abcdef'); // Test key
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    // Get cart from localStorage and display
+    const cart = JSON.parse(localStorage.getItem('lpb_cart') || '{}');
+    const PRODUCTS = window.PRODUCTS || [];
+
+    let total = 0;
+    const summary = document.getElementById('order-summary');
+    Object.keys(cart).forEach(id => {
+      const qty = cart[id];
+      const product = PRODUCTS.find(p => p.id === id);
+      if(!product) return;
+      const line = document.createElement('div');
+      line.style.cssText = 'display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #ddd';
+      line.innerHTML = `<span>${product.title} x${qty}</span><strong>${(product.price * qty).toFixed(2)}€</strong>`;
+      summary.appendChild(line);
+      total += product.price * qty;
+    });
+    document.getElementById('total-amount').textContent = total.toFixed(2) + '€';
+
+    // Handle form submission
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Traitement...';
+
+      const { token } = await stripe.createToken(cardElement);
+      if(token) {
+        alert('Paiement simulé réussi !\nToken: ' + token.id + '\n\nEn production, envoyer ce token à votre serveur pour traitement.');
+        localStorage.removeItem('lpb_cart');
+        setTimeout(() => window.location.href = 'index.html', 2000);
+      } else {
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = 'Erreur lors du paiement. Vérifiez vos données.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Payer maintenant';
+      }
+    });
+
+    cardElement.addEventListener('change', (event) => {
+      const displayError = document.getElementById('card-errors');
+      displayError.textContent = event.error ? event.error.message : '';
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById('dark-toggle');
+    const isDark = localStorage.getItem('lpb_dark') === 'true';
+    if(isDark) document.body.classList.add('dark-mode');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('lpb_dark', document.body.classList.contains('dark-mode'));
+      toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>

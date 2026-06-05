@@ -1,0 +1,15 @@
+{
+  "name": "le-petit-bordey",
+  "version": "1.0.0",
+  "description": "Site artisanal premium pour Le Petit Bordey",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -c-1",
+    "deploy": "npx netlify-cli deploy --prod"
+  },
+  "keywords": ["artisanal", "products", "antilles", "creole"],
+  "author": "Le Petit Bordey",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
