@@ -15,13 +15,13 @@ const CATEGORIES = [
   { id: 'boudins',  label: 'Boudins',  icon: '🌭', desc: 'Recettes familiales, textures parfaites et épices maison.' },
   { id: 'samoussa', label: 'Samoussas', icon: '🥟', desc: 'Feuilletés croustillants, farcis avec amour.' },
   { id: 'accras',   label: 'Accras',   icon: '🍤', desc: 'Beignets croustillants, parfaits pour l\'apéritif.' },
-  { id: 'sauce',    label: 'Sauces',   icon: '🫙', desc: 'Condiments, confits et épices aux saveurs créoles.' }
+  { id: 'sauce',    label: 'Sauces',   icon: '🫙', desc: 'Condiments et confits artisanaux, préparés maison.' },
+  { id: 'epices',   label: 'Épices',   icon: '🌶️', desc: 'Épices et mélanges aux parfums créoles authentiques.' }
 ];
 
 const PRODUCTS = [
   { id: 'accras-crevette', title: 'Accras Crevette', price: 3.50, desc: 'Accras maison, croustillants et savoureux', img: 'alimentation/Accras crevette v3.png', category: 'accras' },
   { id: 'accras-thon', title: 'Accras Thon', price: 3.50, desc: 'Accras au thon, recette traditionnelle', img: 'alimentation/accras thon v3.png', category: 'accras' },
-  { id: 'accras', title: 'Accras', price: 3.00, desc: 'Assortiment d\'accras maison', img: 'alimentation/Accras v3.png', category: 'accras' },
   { id: 'boudin-antillais', title: 'Boudin Artisanal', price: 8.50, desc: 'Recette familiale authentique', img: 'alimentation/Bouddin antillais.png', category: 'boudins' },
   { id: 'boudin-lambi', title: 'Boudin Lambi', price: 9.00, desc: 'Variation spéciale au lambi', img: 'alimentation/Boudin lambi.png', category: 'boudins' },
   { id: 'boudin-morue', title: 'Boudin Morue', price: 9.00, desc: 'Boudin à la morue, parfumé et fin', img: 'alimentation/Boudin morue.png', category: 'boudins' },
@@ -29,16 +29,17 @@ const PRODUCTS = [
   { id: 'samoussa-boeuf', title: 'Samoussa Bœuf', price: 2.50, desc: 'Samoussa maison, viande sélectionnée', img: 'alimentation/samoussa boeufs.png', category: 'samoussa' },
   { id: 'samoussa-legumes', title: 'Samoussa Légumes', price: 2.00, desc: 'Option végétarienne, légumes locaux', img: 'alimentation/Samoussa Legumes.png', category: 'samoussa' },
   { id: 'samoussa-poulet', title: 'Samoussa Poulet', price: 2.50, desc: 'Samoussa poulet aux épices maison', img: 'alimentation/Samoussa poulet.png', category: 'samoussa' },
-  { id: 'cayenne', title: 'Piment Cayenne', price: 3.00, desc: 'Piment en poudre — piquant contrôlé', img: 'epices/cayenne.png', category: 'sauce' },
-  { id: 'cumin', title: 'Cumin', price: 2.50, desc: 'Cumin moulu, arôme profond', img: 'epices/Cumin 2.png', category: 'sauce' },
-  { id: 'curry', title: 'Curry', price: 2.50, desc: 'Mélange curry parfumé', img: 'epices/Curry 2.png', category: 'sauce' },
-  { id: 'gingembre', title: 'Gingembre Moulu', price: 2.80, desc: 'Gingembre moulu, saveur fraîche', img: 'epices/Gimgembre Moulu.png', category: 'sauce' },
-  { id: 'masali', title: 'Masali', price: 3.00, desc: 'Mélange d\'épices créoles', img: 'epices/masali.png', category: 'sauce' },
-  { id: 'paprika', title: 'Paprika', price: 2.50, desc: 'Paprika doux, belle couleur', img: 'epices/Paprika.png', category: 'sauce' },
-  { id: 'colombo', title: 'Poudre à Colombo', price: 2.80, desc: 'Épice typique antillaise', img: 'epices/Poudre a colombo.png', category: 'sauce' },
-  { id: 'raz-el-hanout', title: 'Raz el Hanout', price: 3.20, desc: 'Mélange raffiné du Maghreb', img: 'epices/Raz el Hanout.png', category: 'sauce' },
-  { id: 'tajin', title: 'Tajin', price: 2.90, desc: 'Assaisonnement acidulé', img: 'epices/Tajin.png', category: 'sauce' },
-  { id: 'tandoori', title: 'Tandoori', price: 2.90, desc: 'Épice tandoori parfumée', img: 'epices/Tandoori.png', category: 'sauce' },
+  { id: 'samoussa-thon', title: 'Samoussa Thon', price: 3.00, desc: 'Samoussa au thon, recette traditionnelle', img: 'alimentation/Accras v3.png', category: 'samoussa' },
+  { id: 'cayenne', title: 'Piment Cayenne', price: 3.00, desc: 'Piment en poudre — piquant contrôlé', img: 'epices/cayenne.png', category: 'epices' },
+  { id: 'cumin', title: 'Cumin', price: 2.50, desc: 'Cumin moulu, arôme profond', img: 'epices/Cumin 2.png', category: 'epices' },
+  { id: 'curry', title: 'Curry', price: 2.50, desc: 'Mélange curry parfumé', img: 'epices/Curry 2.png', category: 'epices' },
+  { id: 'gingembre', title: 'Gingembre Moulu', price: 2.80, desc: 'Gingembre moulu, saveur fraîche', img: 'epices/Gimgembre Moulu.png', category: 'epices' },
+  { id: 'masali', title: 'Masali', price: 3.00, desc: 'Mélange d\'épices créoles', img: 'epices/masali.png', category: 'epices' },
+  { id: 'paprika', title: 'Paprika', price: 2.50, desc: 'Paprika doux, belle couleur', img: 'epices/Paprika.png', category: 'epices' },
+  { id: 'colombo', title: 'Poudre à Colombo', price: 2.80, desc: 'Épice typique antillaise', img: 'epices/Poudre a colombo.png', category: 'epices' },
+  { id: 'raz-el-hanout', title: 'Raz el Hanout', price: 3.20, desc: 'Mélange raffiné du Maghreb', img: 'epices/Raz el Hanout.png', category: 'epices' },
+  { id: 'tajin', title: 'Tajin', price: 2.90, desc: 'Assaisonnement acidulé', img: 'epices/Tajin.png', category: 'epices' },
+  { id: 'tandoori', title: 'Tandoori', price: 2.90, desc: 'Épice tandoori parfumée', img: 'epices/Tandoori.png', category: 'epices' },
   { id: 'pot-1', title: 'Confit Maison 1', price: 4.50, desc: 'Confit artisanal, recette familiale', img: 'pot/image00001.png', category: 'sauce' },
   { id: 'pot-2', title: 'Confit Maison 2', price: 4.50, desc: 'Confit artisanal, saveurs équilibrées', img: 'pot/image00002.png', category: 'sauce' },
   { id: 'pot-3', title: 'Condiment Créole 1', price: 4.00, desc: 'Condiment traditionnel', img: 'pot/image00003.png', category: 'sauce' },
@@ -54,7 +55,8 @@ function productCardHTML(p, index) {
     boudins: 'images/product-boudin.svg',
     samoussa: 'images/product-condiment.svg',
     accras: 'images/product-sauce.svg',
-    sauce: 'images/product-piment.svg'
+    sauce: 'images/product-piment.svg',
+    epices: 'images/product-piment.svg'
   }[p.category] || 'images/product-condiment.svg';
 
   return `
@@ -155,7 +157,17 @@ function observeReveal(el) {
   window._revealObserver.observe(el);
 }
 
+function renderCategoryNav() {
+  const nav = document.getElementById('category-nav');
+  if (!nav || nav._rendered) return;
+  nav._rendered = true;
+  nav.innerHTML = CATEGORIES.map(cat =>
+    `<a href="#cat-${cat.id}">${cat.label}</a>`
+  ).join('');
+}
+
 function initCategoryNav() {
+  renderCategoryNav();
   const nav = document.getElementById('category-nav');
   if (!nav) return;
 
@@ -168,7 +180,8 @@ function initCategoryNav() {
       const id = link.getAttribute('href').slice(1);
       const target = document.getElementById(id);
       if (target) {
-        const offset = 120;
+        const bar = document.getElementById('category-nav-wrap');
+        const offset = (bar?.offsetHeight || 56) + 8;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -243,10 +256,52 @@ function initContactForm() {
 }
 
 function pulseCart() {
-  const countEl = cartCount();
-  if (countEl) {
-    countEl.classList.add('pulse');
-    setTimeout(() => countEl.classList.remove('pulse'), 600);
+  document.querySelectorAll('#cart-count, .cart-count-badge').forEach(el => {
+    el.classList.add('pulse');
+    setTimeout(() => el.classList.remove('pulse'), 600);
+  });
+}
+
+function getCartTargetEl() {
+  const sticky = document.getElementById('cart-toggle-sticky');
+  if (sticky && sticky.offsetParent !== null) return sticky;
+  return cartToggle();
+}
+
+function flyToCart(btn, productId) {
+  const card = btn.closest('.product-card');
+  const img = card?.querySelector('.product-visual img');
+  const target = getCartTargetEl();
+  if (!img || !target) return;
+
+  const start = img.getBoundingClientRect();
+  const end = target.getBoundingClientRect();
+
+  const flyer = document.createElement('div');
+  flyer.className = 'cart-flyer';
+  flyer.innerHTML = `<img src="${img.src}" alt="">`;
+  flyer.style.left = `${start.left + start.width / 2}px`;
+  flyer.style.top = `${start.top + start.height / 2}px`;
+  document.body.appendChild(flyer);
+
+  requestAnimationFrame(() => {
+    flyer.style.left = `${end.left + end.width / 2}px`;
+    flyer.style.top = `${end.top + end.height / 2}px`;
+    flyer.style.transform = 'translate(-50%, -50%) scale(0.25)';
+    flyer.style.opacity = '0';
+  });
+
+  setTimeout(() => flyer.remove(), 650);
+
+  target.classList.add('cart-bump');
+  setTimeout(() => target.classList.remove('cart-bump'), 500);
+}
+
+function migrateCartIds() {
+  if (cart.accras) {
+    cart['samoussa-thon'] = (cart['samoussa-thon'] || 0) + cart.accras;
+    delete cart.accras;
+    localStorage.setItem('lpb_cart', JSON.stringify(cart));
   }
 }
 
@@ -449,6 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let cart = JSON.parse(localStorage.getItem('lpb_cart') || '{}');
+migrateCartIds();
 const cartToggle = () => window._cartEls?.cartToggle ?? null;
 const cartEl = () => window._cartEls?.cartEl ?? null;
 const cartClose = () => window._cartEls?.cartClose ?? null;
@@ -467,7 +523,9 @@ function addToCart(id) {
 document.body.addEventListener('click', e => {
   if (e.target.matches('.add-btn') || e.target.closest('.add-btn')) {
     const btn = e.target.matches('.add-btn') ? e.target : e.target.closest('.add-btn');
-    addToCart(btn.dataset.id);
+    const id = btn.dataset.id;
+    flyToCart(btn, id);
+    addToCart(id);
     btn.classList.add('added');
     setTimeout(() => btn.classList.remove('added'), 800);
   }
@@ -491,7 +549,9 @@ function renderCart() {
   });
   const countEl = cartCount();
   const totalEl = cartTotal();
-  if (countEl) countEl.textContent = ids.reduce((s, k) => s + cart[k], 0) || 0;
+  const totalQty = ids.reduce((s, k) => s + cart[k], 0) || 0;
+  if (countEl) countEl.textContent = totalQty;
+  document.querySelectorAll('.cart-count-badge').forEach(el => { el.textContent = totalQty; });
   if (totalEl) totalEl.textContent = formatPrice(total);
 }
 
@@ -516,7 +576,7 @@ document.addEventListener('click', e => {
   const cc = cartClose();
   const backdrop = document.getElementById('cart-backdrop');
 
-  if (t === cartToggle() || t.closest?.('#cart-toggle')) {
+  if (t === cartToggle() || t.closest?.('#cart-toggle') || t.closest?.('#cart-toggle-sticky')) {
     if (cartEl()?.classList.contains('open')) closeCart();
     else openCart();
   }

@@ -116,7 +116,12 @@ body.dark-mode .product-card:hover {
 }
 
 body.dark-mode .category-nav-wrap {
-  background: rgba(26,23,20,0.92);
+  background: rgba(26,23,20,0.97);
+}
+
+body.dark-mode .cart-count-badge {
+  background: #d4af37;
+  color: #1a1208;
 }
 
 body.dark-mode .category-nav a {

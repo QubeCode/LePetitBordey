@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="page-boutique">
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.html">
@@ -42,13 +42,13 @@
       </div>
     </section>
 
-    <div class="category-nav-wrap">
-      <nav class="category-nav" id="category-nav" aria-label="Catégories de produits">
-        <a href="#cat-boudins">Boudins</a>
-        <a href="#cat-samoussa">Samoussas</a>
-        <a href="#cat-accras">Accras</a>
-        <a href="#cat-sauce">Sauces</a>
-      </nav>
+    <div class="category-nav-wrap" id="category-nav-wrap">
+      <div class="category-nav-bar">
+        <nav class="category-nav" id="category-nav" aria-label="Catégories de produits"></nav>
+        <button id="cart-toggle-sticky" type="button" aria-label="Voir le panier" class="cart-btn cart-btn-sticky">
+          🛒 <span class="cart-count-badge" id="cart-count-sticky">0</span>
+        </button>
+      </div>
     </div>
 
     <section class="section shop-page">
