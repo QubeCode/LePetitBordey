@@ -9,20 +9,21 @@
   <link rel="stylesheet" href="./dark-mode.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#home">
-        <img src="images/logo.svg" alt="Le Petit Bordey" class="logo-img" />
+        <img src="logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
       </a>
-      <nav class="main-nav" aria-label="Navigation principale">
-        <a href="#products">Produits</a>
-        <a href="#boutique">Boutique</a>
-        <a href="#values">Nos valeurs</a>
-        <a href="#contact">Contact</a>
-      </nav>
+   <nav class="main-nav" aria-label="Navigation principale">
+  <a href="#about">Notre histoire</a>
+  <a href="#products">Nos produits</a>
+  <a href="#values">Nos valeurs</a>
+  <a href="#contact">Contact</a>
+</nav>
       <div class="header-actions">
         <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier (<span id="cart-count">0</span>)</button>
       </div>
@@ -30,37 +31,57 @@
   </header>
 
   <main>
-    <section id="home" class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Artisan | Antilles</div>
-          <h1>Le Petit Bordey</h1>
-          <p class="lead">Le goût de la tradition artisanale.</p>
-          <div class="cta">
-            <a class="btn primary" href="#products">Découvrir nos produits</a>
-            <a class="btn alt" href="boutique.html">Commander en ligne</a>
-          </div>
-        </div>
-        <div class="hero-media" role="img" aria-label="Sélection de boudin, piments et sauces maison">
-          <img src="image00001.png" alt="Boudin artisanal et condiments Le Petit Bordey" />
-        </div>
-        <div class="logo-accent" aria-hidden="true"><img src="images/logo.png" alt="" style="height:44px;object-fit:contain"/></div>
-      </div>
-    </section>
+   <section id="home" class="hero">
 
+  <div class="hero-banner">
+
+    <img src="Bannière piment 1.png" alt="Produits artisanaux Le Petit Bordey">
+
+    <div class="hero-overlay">
+
+      <div class="hero-content">
+
+       <p class="hero-subtitle">
+  Artisan Guadeloupéen
+</p>
+
+        <h1>Le Petit Bordey</h1>
+
+     <p class="lead">
+  Des saveurs authentiques préparées selon un savoir-faire familial transmis de génération en génération.
+</p>
+
+        <div class="cta">
+
+          <a class="btn primary" href="#products">
+            Découvrir nos produits
+          </a>
+
+          <a class="btn alt" href="#contact">
+            Nous contacter
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
     <section id="about" class="section story">
       <div class="wrap">
         <div class="split">
           <div>
             <h2>Notre histoire</h2>
-            <p class="muted">Chez le Petit Bordey, 
-chaque sauce commence par une histoire. 
-Celle d’une famille qui a grandi entre parfums de piment frais, herbes ciselées à la main et conversations autour d’une table toujours trop petite pour contenir tout le monde. Ici, la cuisine n’est pas seulement une affaire de goût — c’est une façon de transmettre, de rassembler, d’aimer.
-Notre savoir-faire vient de là : de gestes appris en regardant les anciens, de recettes murmurées plutôt qu’écrites, de cette attention portée aux détails que seule la main humaine sait encore donner. Chaque produit qui sort de notre atelier est préparée comme on prépare un repas pour les siens : avec patience, exigence, et une part de cœur.
-Nos créations sont le reflet d’une culture vivante, généreuse, qui ose le feu autant que la douceur. Nous choisissons nos ingrédients comme on choisit nos mots : avec soin, simplicité, et l’envie de partager le meilleur.
-Au Petit Bordey, nous croyons que le goût peut être un lien. Un pont entre nos racines et vos assiettes. Un moyen de faire voyager une tradition sans la dénaturer, et de célébrer ce qui nous unit : la joie de manger ensemble.
-Bienvenue chez nous
-Bienvenue au Petit Bordey, là où chaque sauce a une âme et chaque pot, un peu de notre famille.Dans notre atelier, chaque lot est préparé à la main selon des méthodes traditionnelles — c’est ce qui donne à nos produits leur authenticité et leur caractère unique.</p>
+            <p class="muted">Chez le Petit Bordey, chaque sauce commence par une histoire.
+
+Une histoire de famille, transmise entre générations, où les parfums du piment frais, les herbes ciselées à la main et les recettes créoles occupent une place centrale.
+
+Chaque produit est préparé artisanalement avec le même soin que pour un repas partagé en famille : patience, exigence et authenticité.
+
+Bienvenue au Petit Bordey, là où chaque pot raconte un peu de notre histoire.</p>
           </div>
           <figure class="photo">
             <img src="CuisineBordey.png" alt="Atelier de fabrication artisanale" />
@@ -68,31 +89,29 @@ Bienvenue au Petit Bordey, là où chaque sauce a une âme et chaque pot, un peu
           </figure>
         </div>
       </div>
+     
     </section>
 
-    <section id="products" class="section products">
-      <div class="wrap">
-        <h2>Nos produits</h2>
-        <p class="muted">Sélection premium — recettes familiales et ingrédients d’exception.</p>
-        <div class="product-grid" id="product-grid" aria-live="polite"></div>
-      </div>
-    </section>
+   <section id="products" class="section products">
+  <div class="wrap">
 
-    <section id="boutique" class="section boutique">
-      <div class="wrap">
-        <h2>Boutique</h2>
-        <div class="shop-intro">
-          <div>
-            <p>Filtrez, ajoutez au panier et commandez en quelques clics. Paiement sécurisé et livraison soignée.</p>
-          </div>
-          <div class="filters">
-            <label>Rechercher <input id="search" type="search" placeholder="Rechercher un produit"></label>
-          </div>
-        </div>
-        <div id="shop-grid" class="product-grid"></div>
-      </div>
-    </section>
+    <h2>Nos produits</h2>
 
+    <p class="muted">
+      Découvrez notre sélection artisanale d'épices, sauces, condiments et spécialités créoles.
+    </p>
+
+    <div class="shop-intro">
+      <label>
+        Rechercher
+        <input id="search" type="search" placeholder="Rechercher un produit">
+      </label>
+    </div>
+
+    <div id="shop-grid" class="product-grid"></div>
+
+  </div>
+</section>
     <section id="values" class="section values">
       <div class="wrap">
         <h2>Nos valeurs</h2>
@@ -126,7 +145,7 @@ Bienvenue au Petit Bordey, là où chaque sauce a une âme et chaque pot, un peu
           <p class="muted">Pour commandes, partenariats ou questions.</p>
           <ul class="contact-list">
             <li>Téléphone: <a href="tel:+590600000000">+590 6 00 00 00 00</a></li>
-            <li>Email: <a href="mailto:contact@lepetitbordey.example">contact@lepetitbordey.example</a></li>
+            <li>Email: <a href="mailto:lepetitbordey@gmail.com">lepetitbordey@gmail.com</a></li>
             <li>Adresse: Saint-Claude, Guadeloupe — France d'outre-mer</li>
           </ul>
         </div>
@@ -157,7 +176,7 @@ Bienvenue au Petit Bordey, là où chaque sauce a une âme et chaque pot, un peu
       </div>
       <nav class="foot-nav">
         <a href="#about">Notre Histoire</a>
-        <a href="#products">Produits</a>
+        <a href="#products">Nos Produits</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="legal">

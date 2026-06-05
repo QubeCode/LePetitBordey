@@ -52,13 +52,10 @@ function renderProducts(target, list){
 
 // DOM ready: render where applicable and wire up search
 document.addEventListener('DOMContentLoaded', ()=>{
-  const productGrid = document.getElementById('product-grid');
   const shopGrid = document.getElementById('shop-grid');
   const searchInput = document.getElementById('search');
 
-  renderProducts(productGrid, PRODUCTS);
-  renderProducts(shopGrid, PRODUCTS);
-
+renderProducts(shopGrid, PRODUCTS);
   // search
   if(searchInput){
     searchInput.addEventListener('input', (e)=>{
