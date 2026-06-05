@@ -329,10 +329,13 @@ function closeMobileNav() {
   const mainNav = document.getElementById('main-nav');
   const navToggle = document.getElementById('nav-toggle');
   const backdrop = document.getElementById('nav-backdrop');
-  if (mainNav) mainNav.classList.remove('open');
+  if (mainNav) {
+    mainNav.classList.remove('open');
+    mainNav.style.transform = '';
+  }
   if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
   if (backdrop) { backdrop.classList.remove('visible'); backdrop.setAttribute('aria-hidden', 'true'); }
-  document.body.classList.remove('nav-open');
+  document.body.classList.remove('menu-open');
 }
 
 function openMobileNav() {
@@ -342,7 +345,7 @@ function openMobileNav() {
   if (mainNav) mainNav.classList.add('open');
   if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
   if (backdrop) { backdrop.classList.add('visible'); backdrop.setAttribute('aria-hidden', 'false'); }
-  document.body.classList.add('nav-open');
+  document.body.classList.add('menu-open');
 }
 
 function initMobileNav() {
@@ -359,27 +362,34 @@ function initMobileNav() {
     document.body.appendChild(backdrop);
   }
 
-  navToggle.addEventListener('click', () => {
+  navToggle.addEventListener('click', e => {
+    e.stopPropagation();
     if (mainNav.classList.contains('open')) closeMobileNav();
     else openMobileNav();
   });
 
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMobileNav);
+  mainNav.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (link) closeMobileNav();
   });
 
   let touchStartX = 0;
+  let touchOnLink = false;
+
   mainNav.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
+    touchOnLink = !!e.target.closest('a');
   }, { passive: true });
 
   mainNav.addEventListener('touchmove', e => {
+    if (touchOnLink) return;
     const dx = e.touches[0].clientX - touchStartX;
     if (dx > 10) mainNav.style.transform = `translateX(${Math.min(dx, 80)}px)`;
   }, { passive: true });
 
   mainNav.addEventListener('touchend', e => {
     mainNav.style.transform = '';
+    if (touchOnLink) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (dx > 60) closeMobileNav();
   });
@@ -669,7 +679,7 @@ function openCart() {
   const backdrop = document.getElementById('cart-backdrop');
   if (ce) { ce.classList.add('open'); ce.setAttribute('aria-hidden', 'false'); }
   if (backdrop) { backdrop.classList.add('visible'); backdrop.setAttribute('aria-hidden', 'false'); }
-  document.body.classList.add('nav-open');
+  document.body.classList.add('cart-open');
 }
 
 function closeCart() {
@@ -677,7 +687,7 @@ function closeCart() {
   const backdrop = document.getElementById('cart-backdrop');
   if (ce) { ce.classList.remove('open'); ce.setAttribute('aria-hidden', 'true'); }
   if (backdrop) { backdrop.classList.remove('visible'); backdrop.setAttribute('aria-hidden', 'true'); }
-  document.body.classList.remove('nav-open');
+  document.body.classList.remove('cart-open');
 }
 
 document.addEventListener('click', e => {

@@ -11,8 +11,7 @@
   --text:#222;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
-html{overflow-x:clip}
+html,body{height:100%;max-width:100%}
 body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text); background:var(--cream); margin:0; -webkit-font-smoothing:antialiased}
 .wrap{max-width:1100px;margin:0 auto;padding:28px}
 
@@ -330,7 +329,7 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
 .map iframe{width:100%;height:220px;border:0;border-radius:10px}
 
 /* Cart */
-.cart{position:fixed;right:20px;top:80px;width:360px;background:#fff;border-radius:12px;box-shadow:0 30px 70px rgba(32,24,18,0.2);transform:translateX(420px);transition:transform .32s ease;z-index:60;border:1px solid rgba(0,0,0,0.06)}
+.cart{position:fixed;right:20px;top:80px;width:360px;background:#fff;border-radius:12px;box-shadow:0 30px 70px rgba(32,24,18,0.2);transform:translateX(420px);transition:transform .32s ease;z-index:120;border:1px solid rgba(0,0,0,0.06)}
 .cart.open{transform:translateX(0)}
 .cart-header{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid rgba(0,0,0,0.05)}
 .cart-items{max-height:320px;overflow:auto;padding:10px}
@@ -627,12 +626,22 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
 .category-nav-wrap{
   position:sticky;
   top:0;
-  z-index:85;
+  z-index:70;
   background:rgba(247,241,230,0.97);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 20px rgba(0,0,0,0.06);
+}
+.page-boutique main{
+  overflow:visible;
+}
+.page-boutique .shop-hero + .category-nav-wrap{
+  margin-top:0;
+}
+body.cart-open .category-nav-wrap{
+  visibility:hidden;
+  pointer-events:none;
 }
 #category-nav-placeholder{display:none!important}
 .category-nav-bar{
@@ -782,19 +791,22 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   white-space:nowrap;
 }
 
-/* Nav mobile backdrop */
+/* Nav mobile backdrop — sous le header pour laisser le menu cliquable */
 .nav-backdrop{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.45);
-  z-index:85;
+  z-index:75;
   opacity:0;
   transition:opacity .3s ease;
 }
 .nav-backdrop.visible{
   display:block;
   opacity:1;
+}
+body.menu-open .site-header{
+  z-index:100;
 }
 
 /* Checkout — lignes éditables */
@@ -1106,7 +1118,7 @@ blockquote:hover{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.4);
-  z-index:55;
+  z-index:110;
   opacity:0;
   transition:opacity .3s ease;
 }
@@ -1151,8 +1163,9 @@ blockquote:hover{
     box-shadow:-8px 0 32px rgba(0,0,0,0.15);
     transform:translateX(100%);
     transition:transform .3s ease;
-    z-index:90;
+    z-index:101;
     overflow-y:auto;
+    pointer-events:auto;
   }
   .header-inner .main-nav.open{transform:translateX(0)}
   .header-inner .main-nav a{
@@ -1163,10 +1176,15 @@ blockquote:hover{
     font-size:1.05rem;
     border-bottom:1px solid rgba(0,0,0,0.06);
     text-align:left;
+    position:relative;
+    z-index:1;
+    pointer-events:auto;
+    -webkit-tap-highlight-color:rgba(46,94,59,0.15);
   }
   .header-inner .main-nav a::after{display:none}
 
-  body.nav-open{overflow:hidden}
+  body.menu-open{overflow:hidden}
+  body.cart-open{overflow:hidden}
 
   .story .split{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
