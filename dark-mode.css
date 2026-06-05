@@ -247,6 +247,21 @@ body.dark-mode .checkout-empty {
   border-color: rgba(212,175,55,0.15);
 }
 
+body.dark-mode .add-toast {
+  background: rgba(35,32,28,0.98);
+  border-left-color: #d4af37;
+  color: #e8e3da;
+}
+
+body.dark-mode .add-toast-icon {
+  background: #d4af37;
+  color: #1a1208;
+}
+
+body.dark-mode .add-toast strong {
+  color: #d4af37;
+}
+
 @media (max-width: 480px) {
   .dark-mode-toggle {
     bottom: 16px;

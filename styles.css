@@ -619,14 +619,14 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
 .shop-hero h1{font-family:'Playfair Display',serif;font-size:2.6rem;margin:8px 0;color:var(--dark-wood)}
 .shop-hero .muted{max-width:480px;margin:0 auto}
 
-/* Category navigation — barre sticky boutique */
+/* Category navigation — barre boutique */
 .page-boutique .site-header{
   position:relative;
   top:auto;
 }
 .category-nav-wrap{
-  position:sticky;
-  top:0;
+  position:relative;
+  top:auto;
   z-index:85;
   background:rgba(247,241,230,0.97);
   backdrop-filter:blur(14px);
@@ -634,6 +634,13 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   border-bottom:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 20px rgba(0,0,0,0.06);
 }
+.page-boutique .category-nav-wrap.is-pinned{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+}
+#category-nav-placeholder{display:none}
 .category-nav-bar{
   display:flex;
   align-items:center;
@@ -727,6 +734,103 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   height:100%;
   object-fit:cover;
 }
+
+/* Toast ajout panier */
+.toast-container{
+  position:fixed;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9998;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  pointer-events:none;
+  width:min(360px,92vw);
+}
+.add-toast{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:12px 18px;
+  background:#fff;
+  border-left:4px solid var(--deep-green);
+  border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  font-size:0.95rem;
+  font-weight:600;
+  color:var(--dark-wood);
+  opacity:0;
+  transform:translateY(-12px);
+  transition:opacity .3s ease, transform .3s ease;
+}
+.add-toast.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.add-toast-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  background:var(--deep-green);
+  color:#fff;
+  border-radius:50%;
+  font-size:0.85rem;
+  flex-shrink:0;
+}
+.add-toast strong{
+  margin-left:auto;
+  color:var(--deep-green);
+  white-space:nowrap;
+}
+
+/* Nav mobile backdrop */
+.nav-backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:85;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.nav-backdrop.visible{
+  display:block;
+  opacity:1;
+}
+
+/* Checkout — lignes éditables */
+.order-line-editable{
+  flex-direction:column;
+  align-items:stretch;
+  gap:10px;
+  padding:14px 0;
+}
+.order-line-info{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.order-line-title{font-weight:700;color:var(--dark-wood)}
+.order-line-unit{font-size:0.85rem;color:#888}
+.order-line-controls{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.checkout-qty-btns{align-items:center}
+.checkout-qty{
+  min-width:28px;
+  text-align:center;
+  font-weight:700;
+  font-size:1rem;
+}
+.order-line-subtotal{color:var(--deep-green);white-space:nowrap}
 
 /* Category sections */
 .category-section{margin-bottom:56px}
@@ -1022,7 +1126,10 @@ blockquote:hover{
 
   .nav-toggle{display:flex}
 
-  .main-nav{
+  .header-inner .main-nav{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
     position:fixed;
     top:0;
     right:0;
@@ -1030,21 +1137,25 @@ blockquote:hover{
     height:100vh;
     height:100dvh;
     background:var(--cream);
-    flex-direction:column;
     padding:80px 24px 24px;
-    gap:4px;
+    gap:0;
     box-shadow:-8px 0 32px rgba(0,0,0,0.15);
     transform:translateX(100%);
     transition:transform .3s ease;
     z-index:90;
+    overflow-y:auto;
   }
-  .main-nav.open{transform:translateX(0)}
-  .main-nav a{
+  .header-inner .main-nav.open{transform:translateX(0)}
+  .header-inner .main-nav a{
+    display:block;
+    width:100%;
     margin:0;
-    padding:14px 0;
+    padding:16px 0;
     font-size:1.05rem;
     border-bottom:1px solid rgba(0,0,0,0.06);
+    text-align:left;
   }
+  .header-inner .main-nav a::after{display:none}
 
   body.nav-open{overflow:hidden}
 
@@ -1073,6 +1184,8 @@ blockquote:hover{
   .contact-teaser-inner{flex-direction:column;text-align:center}
   .contact-page-grid{grid-template-columns:1fr;gap:32px}
   .form-row{grid-template-columns:1fr}
+  .toast-container{top:72px}
+  .add-toast{font-size:0.88rem;padding:10px 14px}
   .category-nav-bar{padding:8px 12px;gap:8px}
   .category-header{flex-wrap:wrap}
   .category-count{margin-left:auto}
