@@ -2,15 +2,9 @@
   "name": "le-petit-bordey",
   "buildCommand": "echo 'Static site - no build'",
   "outputDirectory": ".",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
     {
-      "source": "/.*",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",

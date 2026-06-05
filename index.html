@@ -1,193 +1,387 @@
 <!doctype html>
+
 <html lang="fr">
+
 <head>
+
   <meta charset="utf-8" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Le Petit Bordey — Produits artisanaux antillais</title>
+
   <meta name="description" content="Le Petit Bordey — Boudin artisanal, sauce chien maison, piments confits et condiments créoles. Artisanat familial, saveurs authentiques." />
+
   <link rel="stylesheet" href="./styles.css">
+
   <link rel="stylesheet" href="./dark-mode.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
+
   <header class="site-header">
+
     <div class="wrap header-inner">
+
       <a class="brand" href="#home">
+
         <img src="logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
+
       </a>
-   <nav class="main-nav" aria-label="Navigation principale">
-  <a href="#about">Notre histoire</a>
-  <a href="#products">Nos produits</a>
-  <a href="#values">Nos valeurs</a>
-  <a href="#contact">Contact</a>
-</nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+
+        <span></span><span></span><span></span>
+
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+
+        <a href="#about">Notre histoire</a>
+
+        <a href="boutique.html">Nos produits</a>
+
+        <a href="#values">Nos valeurs</a>
+
+        <a href="contact.html">Contact</a>
+
+      </nav>
+
       <div class="header-actions">
+
         <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier (<span id="cart-count">0</span>)</button>
+
       </div>
+
     </div>
+
   </header>
 
+
+
   <main>
-   <section id="home" class="hero">
 
-  <div class="hero-banner">
+    <section id="home" class="hero">
 
-    <img src="Bannière piment 1.png" alt="Produits artisanaux Le Petit Bordey">
+      <div class="hero-banner">
 
-    <div class="hero-overlay">
+        <img src="Bannière piment 1.png" alt="Produits artisanaux Le Petit Bordey">
 
-      <div class="hero-content">
+        <div class="hero-overlay">
 
-       <p class="hero-subtitle">
-  Artisan Guadeloupéen
-</p>
+          <div class="hero-content">
 
-        <h1>Le Petit Bordey</h1>
+            <p class="hero-subtitle">Artisan Guadeloupéen</p>
 
-     <p class="lead">
-  Des saveurs authentiques préparées selon un savoir-faire familial transmis de génération en génération.
-</p>
+            <h1>Le Petit Bordey</h1>
 
-        <div class="cta">
+            <p class="lead">
 
-          <a class="btn primary" href="#products">
-            Découvrir nos produits
-          </a>
+              Des saveurs authentiques préparées selon un savoir-faire familial transmis de génération en génération.
 
-          <a class="btn alt" href="#contact">
-            Nous contacter
-          </a>
+            </p>
+
+            <div class="cta">
+
+              <a class="btn primary" href="boutique.html">Découvrir nos produits</a>
+
+              <a class="btn alt" href="contact.html">Nous contacter</a>
+
+            </div>
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </div>
 
-</section>
+
     <section id="about" class="section story">
+
       <div class="wrap">
+
         <div class="split">
-          <div>
-            <h2>Notre histoire</h2>
+
+          <div class="reveal">
+
+            <p class="eyebrow">Notre histoire</p>
+
+            <h2>Une passion de famille</h2>
+
             <p class="muted">Chez le Petit Bordey, chaque sauce commence par une histoire.
+
+
 
 Une histoire de famille, transmise entre générations, où les parfums du piment frais, les herbes ciselées à la main et les recettes créoles occupent une place centrale.
 
+
+
 Chaque produit est préparé artisanalement avec le même soin que pour un repas partagé en famille : patience, exigence et authenticité.
 
+
+
 Bienvenue au Petit Bordey, là où chaque pot raconte un peu de notre histoire.</p>
+
           </div>
-          <figure class="photo">
+
+          <figure class="photo reveal">
+
             <img src="CuisineBordey.png" alt="Atelier de fabrication artisanale" />
+
             <figcaption>Fabrication artisanale dans notre atelier familial</figcaption>
+
           </figure>
+
         </div>
+
       </div>
-     
+
     </section>
 
-   <section id="products" class="section products">
-  <div class="wrap">
 
-    <h2>Nos produits</h2>
 
-    <p class="muted">
-      Découvrez notre sélection artisanale d'épices, sauces, condiments et spécialités créoles.
-    </p>
+    <section class="section shop-teaser">
 
-    <div class="shop-intro">
-      <label>
-        Rechercher
-        <input id="search" type="search" placeholder="Rechercher un produit">
-      </label>
-    </div>
-
-    <div id="shop-grid" class="product-grid"></div>
-
-  </div>
-</section>
-    <section id="values" class="section values">
       <div class="wrap">
-        <h2>Nos valeurs</h2>
-        <ul class="values-list">
-          <li><span class="icon">🌿</span><strong>Fabrication artisanale</strong></li>
-          <li><span class="icon">👨‍👩‍👧‍👦</span><strong>Entreprise familiale</strong></li>
-          <li><span class="icon">🌶️</span><strong>Produits authentiques</strong></li>
-          <li><span class="icon">🇬🇵</span><strong>Héritage créole</strong></li>
-        </ul>
+
+        <div class="section-heading reveal">
+
+          <p class="eyebrow">La boutique</p>
+
+          <h2>Nos spécialités</h2>
+
+          <p class="muted">Découvrez nos gammes artisanales, préparées avec des ingrédients soigneusement sélectionnés.</p>
+
+        </div>
+
+        <div class="shop-teaser-categories">
+
+          <a href="boutique.html#cat-boudins" class="teaser-card reveal">
+
+            <span class="teaser-icon">🌭</span>
+
+            <strong>Boudins</strong>
+
+            <span class="teaser-link">Explorer →</span>
+
+          </a>
+
+          <a href="boutique.html#cat-samoussa" class="teaser-card reveal">
+
+            <span class="teaser-icon">🥟</span>
+
+            <strong>Samoussas</strong>
+
+            <span class="teaser-link">Explorer →</span>
+
+          </a>
+
+          <a href="boutique.html#cat-accras" class="teaser-card reveal">
+
+            <span class="teaser-icon">🍤</span>
+
+            <strong>Accras</strong>
+
+            <span class="teaser-link">Explorer →</span>
+
+          </a>
+
+          <a href="boutique.html#cat-sauce" class="teaser-card reveal">
+
+            <span class="teaser-icon">🫙</span>
+
+            <strong>Sauces</strong>
+
+            <span class="teaser-link">Explorer →</span>
+
+          </a>
+
+        </div>
+
+        <div class="shop-teaser-cta reveal">
+
+          <a class="btn primary" href="boutique.html">Voir toute la boutique</a>
+
+        </div>
+
       </div>
+
     </section>
+
+
+
+    <section id="values" class="section values">
+
+      <div class="wrap">
+
+        <div class="section-heading reveal">
+
+          <p class="eyebrow">Ce qui nous anime</p>
+
+          <h2>Nos valeurs</h2>
+
+        </div>
+
+        <ul class="values-list">
+
+          <li class="reveal"><span class="icon">🌿</span><strong>Fabrication artisanale</strong></li>
+
+          <li class="reveal"><span class="icon">👨‍👩‍👧‍👦</span><strong>Entreprise familiale</strong></li>
+
+          <li class="reveal"><span class="icon">🌶️</span><strong>Produits authentiques</strong></li>
+
+          <li class="reveal"><span class="icon">🇬🇵</span><strong>Héritage créole</strong></li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+
 
     <section id="testimonials" class="section testimonials">
+
       <div class="wrap">
-        <h2>Avis clients</h2>
-        <div class="test-grid">
-          <blockquote>
-            « Un boudin hors pair — textures et épices parfaitement équilibrées. »<cite>— Marie, Martinique</cite>
-          </blockquote>
-          <blockquote>
-            « Les sauces sont incroyables, on retrouve les saveurs de la maison. »<cite>— Luc, Guadeloupe</cite>
-          </blockquote>
+
+        <div class="section-heading reveal">
+
+          <p class="eyebrow">Ils nous font confiance</p>
+
+          <h2>Avis clients</h2>
+
         </div>
+
+        <div class="test-grid">
+
+          <blockquote class="reveal">
+
+            « Un boudin hors pair — textures et épices parfaitement équilibrées. »<cite>— Marie, Martinique</cite>
+
+          </blockquote>
+
+          <blockquote class="reveal">
+
+            « Les sauces sont incroyables, on retrouve les saveurs de la maison. »<cite>— Luc, Guadeloupe</cite>
+
+          </blockquote>
+
+        </div>
+
       </div>
+
     </section>
 
-    <section id="contact" class="section contact">
-      <div class="wrap contact-grid">
+
+
+    <section class="section contact-teaser">
+
+      <div class="wrap contact-teaser-inner reveal">
+
         <div>
-          <h2>Contact</h2>
-          <p class="muted">Pour commandes, partenariats ou questions.</p>
-          <ul class="contact-list">
-            <li>Téléphone: <a href="tel:+590600000000">+590 6 00 00 00 00</a></li>
-            <li>Email: <a href="mailto:lepetitbordey@gmail.com">lepetitbordey@gmail.com</a></li>
-            <li>Adresse: Saint-Claude, Guadeloupe — France d'outre-mer</li>
-          </ul>
+
+          <p class="eyebrow">Contact</p>
+
+          <h2>Une question, une commande ?</h2>
+
+          <p class="muted">Notre équipe vous répond sous 48h. Écrivez-nous directement depuis le site.</p>
+
         </div>
-        <div class="map">
-          <iframe title="Carte Le Petit Bordey" src="https://www.google.com/maps?q=Saint-Claude,Guadeloupe&output=embed" loading="lazy"></iframe>
-        </div>
+
+        <a class="btn primary" href="contact.html">Nous écrire</a>
+
       </div>
+
     </section>
+
   </main>
 
+
+
   <aside id="cart" class="cart" aria-hidden="true">
+
     <div class="cart-header">
+
       <h3>Panier</h3>
+
       <button id="cart-close" aria-label="Fermer le panier">✕</button>
+
     </div>
+
     <div id="cart-items" class="cart-items"></div>
+
     <div class="cart-footer">
+
       <div class="total">Total: <strong id="cart-total">0€</strong></div>
+
       <button id="checkout" class="btn primary">Passer la commande</button>
+
     </div>
+
   </aside>
 
+
+
+  <div class="cart-backdrop" id="cart-backdrop" aria-hidden="true"></div>
+
+
+
   <footer class="site-footer">
+
     <div class="wrap footer-inner">
+
       <div class="brand-col">
+
         <div class="logo">Le Petit Bordey</div>
+
         <p class="muted">Tradition • Famille • Artisanat</p>
+
       </div>
+
       <nav class="foot-nav">
+
         <a href="#about">Notre Histoire</a>
-        <a href="#products">Nos Produits</a>
-        <a href="#contact">Contact</a>
+
+        <a href="boutique.html">Nos Produits</a>
+
+        <a href="contact.html">Contact</a>
+
       </nav>
+
       <div class="legal">
+
         <a href="#">Mentions légales</a>
+
         <a href="#">Politique de confidentialité</a>
+
       </div>
+
     </div>
+
   </footer>
+
+
 
   <button class="dark-mode-toggle" id="dark-toggle" aria-label="Basculer mode sombre">🌙</button>
 
+
+
   <script src="./script.js" defer></script>
+
 </body>
+
 </html>
+
+

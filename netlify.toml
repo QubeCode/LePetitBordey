@@ -2,11 +2,6 @@
   publish = "."
   command = "echo 'Static site - no build required'"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 [context.production]
   environment = { NODE_ENV = "production" }
 

@@ -3,20 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Boutique — Le Petit Bordey</title>
+  <title>Nos produits — Le Petit Bordey</title>
+  <meta name="description" content="Boudins, samoussas, accras, sauces et épices artisanaux. Le Petit Bordey, Guadeloupe." />
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./dark-mode.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="index.html"><img src="images/logo.svg" alt="Le Petit Bordey" class="logo-img"/></a>
-      <nav class="main-nav" aria-label="Navigation principale">
-        <a href="index.html#products">Produits</a>
-        <a href="boutique.html">Boutique</a>
+      <a class="brand" href="index.html">
+        <img src="logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <a href="index.html#about">Notre histoire</a>
+        <a href="boutique.html" aria-current="page">Nos produits</a>
         <a href="index.html#values">Nos valeurs</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
         <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier (<span id="cart-count">0</span>)</button>
@@ -25,16 +34,33 @@
   </header>
 
   <main>
-    <section class="section">
-      <div class="wrap">
-        <h1>La Boutique</h1>
-        <p class="muted">Filtrez, parcourez et commandez nos produits artisanaux.</p>
+    <section class="shop-hero">
+      <div class="wrap shop-hero-inner reveal">
+        <p class="eyebrow">La boutique</p>
+        <h1>Nos produits artisanaux</h1>
+        <p class="muted">Parcourez nos spécialités par catégorie et commandez en quelques clics.</p>
+      </div>
+    </section>
 
-        <div class="shop-intro">
-          <label class="search">Rechercher <input id="search" type="search" placeholder="Ex : boudin, piment"></label>
+    <div class="category-nav-wrap">
+      <nav class="category-nav" id="category-nav" aria-label="Catégories de produits">
+        <a href="#cat-boudins">Boudins</a>
+        <a href="#cat-samoussa">Samoussas</a>
+        <a href="#cat-accras">Accras</a>
+        <a href="#cat-sauce">Sauces</a>
+      </nav>
+    </div>
+
+    <section class="section shop-page">
+      <div class="wrap">
+        <div class="shop-toolbar reveal">
+          <label class="search-label">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input id="search" type="search" placeholder="Rechercher un produit…">
+          </label>
         </div>
 
-        <div id="shop-grid" class="product-grid" aria-live="polite"></div>
+        <div id="shop-sections" aria-live="polite"></div>
       </div>
     </section>
   </main>
@@ -51,11 +77,23 @@
     </div>
   </aside>
 
+  <div class="cart-backdrop" id="cart-backdrop" aria-hidden="true"></div>
+
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <div class="brand-col"><div class="logo">Le Petit Bordey</div><p class="muted">Tradition • Famille • Artisanat</p></div>
-      <nav class="foot-nav"><a href="index.html#about">Notre Histoire</a><a href="index.html#products">Produits</a></nav>
-      <div class="legal"><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a></div>
+      <div class="brand-col">
+        <div class="logo">Le Petit Bordey</div>
+        <p class="muted">Tradition • Famille • Artisanat</p>
+      </div>
+      <nav class="foot-nav">
+        <a href="index.html#about">Notre Histoire</a>
+        <a href="boutique.html">Nos Produits</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
     </div>
   </footer>
 

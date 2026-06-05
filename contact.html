@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Le Petit Bordey</title>
+  <meta name="description" content="Contactez Le Petit Bordey pour vos commandes, partenariats ou questions. Saint-Claude, Guadeloupe." />
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./dark-mode.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="logopetitbordey.png" alt="Le Petit Bordey" class="logo-img" />
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+        <a href="index.html#about">Notre histoire</a>
+        <a href="boutique.html">Nos produits</a>
+        <a href="index.html#values">Nos valeurs</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="cart-toggle" aria-label="Voir le panier" class="cart-btn">Panier (<span id="cart-count">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-hero">
+      <div class="wrap contact-hero-inner reveal">
+        <p class="eyebrow">Restons en contact</p>
+        <h1>Écrivez-nous</h1>
+        <p class="muted">Commandes, partenariats, renseignements — nous vous répondons sous 48h.</p>
+      </div>
+    </section>
+
+    <section class="section contact-page">
+      <div class="wrap contact-page-grid">
+        <div class="contact-info reveal">
+          <h2>Nos coordonnées</h2>
+          <ul class="contact-cards">
+            <li class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">📞</span>
+              <div>
+                <strong>Téléphone</strong>
+                <a href="tel:+33768456535">+33 7 68 45 65 35</a>
+              </div>
+            </li>
+            <li class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">✉️</span>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:lepetitbordey@gmail.com">lepetitbordey@gmail.com</a>
+              </div>
+            </li>
+            <li class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">📍</span>
+              <div>
+                <strong>Adresse</strong>
+                <span>Saint-Claude, Guadeloupe</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="map contact-map">
+            <iframe title="Carte Le Petit Bordey" src="https://www.google.com/maps?q=Saint-Claude,Guadeloupe&output=embed" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal">
+          <h2>Envoyer un message</h2>
+          <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+          <form id="contact-form" class="contact-form" action="https://formsubmit.co/lepetitbordey@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Nouveau message — Le Petit Bordey">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+            <div class="form-row">
+              <label>
+                Nom complet
+                <input type="text" name="name" required placeholder="Votre nom" autocomplete="name">
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" required placeholder="votre@email.com" autocomplete="email">
+              </label>
+            </div>
+
+            <label>
+              Sujet
+              <select name="subject" required>
+                <option value="">Choisir un sujet</option>
+                <option value="Commande">Commande</option>
+                <option value="Partenariat">Partenariat</option>
+                <option value="Renseignement">Renseignement</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+
+            <label>
+              Message
+              <textarea name="message" required rows="6" placeholder="Décrivez votre demande…"></textarea>
+            </label>
+
+            <button type="submit" class="btn primary form-submit">
+              Envoyer le message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Panier</h3>
+      <button id="cart-close" aria-label="Fermer le panier">✕</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="total">Total: <strong id="cart-total">0€</strong></div>
+      <button id="checkout" class="btn primary">Passer la commande</button>
+    </div>
+  </aside>
+
+  <div class="cart-backdrop" id="cart-backdrop" aria-hidden="true"></div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="brand-col">
+        <div class="logo">Le Petit Bordey</div>
+        <p class="muted">Tradition • Famille • Artisanat</p>
+      </div>
+      <nav class="foot-nav">
+        <a href="index.html#about">Notre Histoire</a>
+        <a href="boutique.html">Nos Produits</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="dark-mode-toggle" id="dark-toggle" aria-label="Basculer mode sombre">🌙</button>
+
+  <script src="./script.js" defer></script>
+</body>
+</html>

@@ -97,6 +97,104 @@ body.dark-mode textarea::placeholder {
   color: rgba(184,173,160,0.5);
 }
 
+body.dark-mode .teaser-card {
+  background: linear-gradient(180deg, rgba(35,32,28,0.95), rgba(28,25,22,0.95));
+  border-color: rgba(212,175,55,0.15);
+}
+
+body.dark-mode .teaser-card:hover {
+  border-color: rgba(212,175,55,0.35);
+}
+
+body.dark-mode .product-card {
+  background: rgba(28,25,22,0.95);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .product-card:hover {
+  box-shadow: 0 20px 50px rgba(212,175,55,0.1);
+}
+
+body.dark-mode .category-nav-wrap {
+  background: rgba(26,23,20,0.92);
+}
+
+body.dark-mode .category-nav a {
+  background: rgba(35,32,28,0.9);
+  border-color: rgba(212,175,55,0.2);
+  color: #d4af37;
+}
+
+body.dark-mode .category-nav a.active,
+body.dark-mode .category-nav a:hover {
+  background: var(--deep-green);
+  color: #fff;
+}
+
+body.dark-mode .contact-form,
+body.dark-mode .contact-card {
+  background: rgba(35,32,28,0.95);
+  border-color: rgba(212,175,55,0.15);
+}
+
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form select,
+body.dark-mode .contact-form textarea {
+  background: rgba(40,35,30,0.8);
+  border-color: rgba(212,175,55,0.2);
+  color: #e8e3da;
+}
+
+body.dark-mode .search-label input {
+  background: rgba(35,32,28,0.9);
+  border-color: rgba(212,175,55,0.2);
+  color: #e8e3da;
+}
+
+body.dark-mode .shop-hero,
+body.dark-mode .contact-hero {
+  background: linear-gradient(135deg, rgba(46,94,59,0.15) 0%, rgba(20,18,15,0.5) 100%);
+}
+
+body.dark-mode .category-header {
+  border-bottom-color: rgba(212,175,55,0.15);
+}
+
+body.dark-mode .category-icon {
+  background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(46,94,59,0.15));
+}
+
+body.dark-mode .category-count {
+  background: rgba(212,175,55,0.1);
+  color: #d4af37;
+}
+
+body.dark-mode .product-footer {
+  border-top-color: rgba(212,175,55,0.1);
+}
+
+body.dark-mode .order-summary-box,
+body.dark-mode .checkout-payment {
+  background: rgba(35,32,28,0.95);
+  border-color: rgba(212,175,55,0.15);
+}
+
+body.dark-mode .main-nav {
+  background: var(--cream);
+}
+
+body.dark-mode .nav-toggle span {
+  background: #d4af37;
+}
+
+body.dark-mode .nav-toggle {
+  border-color: rgba(212,175,55,0.3);
+}
+
+body.dark-mode .contact-teaser {
+  background: linear-gradient(135deg, #1e3d28 0%, #0f0d0a 100%);
+}
+
 /* Toggle button */
 .dark-mode-toggle {
   position: fixed;
