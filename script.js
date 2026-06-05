@@ -389,45 +389,6 @@ function initMobileNav() {
   });
 }
 
-function initCategoryBarPin() {
-  const bar = document.getElementById('category-nav-wrap');
-  if (!bar || !document.body.classList.contains('page-boutique')) return;
-
-  let placeholder = document.getElementById('category-nav-placeholder');
-  if (!placeholder) {
-    placeholder = document.createElement('div');
-    placeholder.id = 'category-nav-placeholder';
-    bar.after(placeholder);
-  }
-
-  function update() {
-    if (window.innerWidth > 900) {
-      bar.classList.remove('is-pinned');
-      placeholder.style.display = 'none';
-      return;
-    }
-    const hero = document.querySelector('.shop-hero');
-    const footer = document.querySelector('.site-footer');
-    const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
-    const footerTop = footer?.getBoundingClientRect().top ?? Infinity;
-    const barH = bar.offsetHeight;
-    const inShopZone = heroBottom <= 0 && footerTop > barH + 20;
-
-    if (inShopZone) {
-      bar.classList.add('is-pinned');
-      placeholder.style.height = barH + 'px';
-      placeholder.style.display = 'block';
-    } else {
-      bar.classList.remove('is-pinned');
-      placeholder.style.display = 'none';
-    }
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-}
-
 function getCheckoutTotal() {
   return Object.keys(cart).reduce((t, id) => {
     const p = PRODUCTS.find(x => x.id === id);
@@ -619,7 +580,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initCheckout();
   initMobileNav();
-  initCategoryBarPin();
 
   window._cartEls = {
     cartToggle: document.getElementById('cart-toggle'),

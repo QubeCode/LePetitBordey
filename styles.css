@@ -625,8 +625,8 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   top:auto;
 }
 .category-nav-wrap{
-  position:relative;
-  top:auto;
+  position:sticky;
+  top:0;
   z-index:85;
   background:rgba(247,241,230,0.97);
   backdrop-filter:blur(14px);
@@ -634,13 +634,7 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   border-bottom:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 20px rgba(0,0,0,0.06);
 }
-.page-boutique .category-nav-wrap.is-pinned{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-}
-#category-nav-placeholder{display:none}
+#category-nav-placeholder{display:none!important}
 .category-nav-bar{
   display:flex;
   align-items:center;
@@ -970,6 +964,9 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
 .contact-form input,
 .contact-form select,
 .contact-form textarea{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
   padding:13px 16px;
   border:1px solid rgba(0,0,0,0.12);
   border-radius:10px;
@@ -986,7 +983,15 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   box-shadow:0 0 0 3px rgba(46,94,59,0.1);
   background:#fff;
 }
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  min-width:0;
+}
+.form-row > label{
+  min-width:0;
+}
 .form-submit{width:100%;padding:15px;font-size:1rem;margin-top:4px}
 .form-feedback{
   padding:14px 18px;
@@ -1049,10 +1054,12 @@ blockquote:hover{
 /* Checkout */
 .checkout-grid{
   display:grid;
-  grid-template-columns:1fr 360px;
+  grid-template-columns:minmax(0,1fr) minmax(0,360px);
   gap:32px;
   margin-top:24px;
 }
+.checkout-summary,
+.checkout-payment{min-width:0}
 .checkout-summary h2{font-size:1.3rem}
 .order-summary-box{
   background:#f7f1e6;
@@ -1080,6 +1087,8 @@ blockquote:hover{
   border-radius:12px;
   border:1px solid rgba(0,0,0,0.08);
   height:fit-content;
+  min-width:0;
+  overflow:hidden;
 }
 .card-element{
   border:1px solid rgba(0,0,0,0.12);
@@ -1300,9 +1309,13 @@ blockquote:hover{
   gap:6px;
   font-weight:600;
   font-size:0.9rem;
+  min-width:0;
 }
 .checkout-form input,
 .checkout-form textarea{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
   padding:12px 14px;
   border:1px solid rgba(0,0,0,0.12);
   border-radius:10px;
