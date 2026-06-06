@@ -166,6 +166,45 @@ function renderCategoryNav() {
   ).join('');
 }
 
+function getCategoryBarHeight() {
+  const bar = document.getElementById('category-nav-wrap');
+  return bar?.offsetHeight || 56;
+}
+
+function initCategoryBarFixed() {
+  const bar = document.getElementById('category-nav-wrap');
+  const hero = document.querySelector('.shop-hero');
+  if (!bar || !hero || !document.body.classList.contains('page-boutique')) return;
+
+  let placeholder = document.getElementById('category-nav-placeholder');
+  if (!placeholder) {
+    placeholder = document.createElement('div');
+    placeholder.id = 'category-nav-placeholder';
+    bar.after(placeholder);
+  }
+
+  function update() {
+    if (document.body.classList.contains('cart-open')) {
+      bar.classList.remove('is-fixed');
+      placeholder.style.display = 'none';
+      return;
+    }
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom <= 0) {
+      bar.classList.add('is-fixed');
+      placeholder.style.height = bar.offsetHeight + 'px';
+      placeholder.style.display = 'block';
+    } else {
+      bar.classList.remove('is-fixed');
+      placeholder.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
 function initCategoryNav() {
   renderCategoryNav();
   const nav = document.getElementById('category-nav');
@@ -180,8 +219,7 @@ function initCategoryNav() {
       const id = link.getAttribute('href').slice(1);
       const target = document.getElementById(id);
       if (target) {
-        const bar = document.getElementById('category-nav-wrap');
-        const offset = (bar?.offsetHeight || 56) + 8;
+        const offset = getCategoryBarHeight() + 12;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -586,6 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initCategoryNav();
+  initCategoryBarFixed();
   initScrollReveal();
   initContactForm();
   initCheckout();

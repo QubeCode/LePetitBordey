@@ -624,8 +624,7 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   top:auto;
 }
 .category-nav-wrap{
-  position:sticky;
-  top:0;
+  position:relative;
   z-index:70;
   background:rgba(247,241,230,0.97);
   backdrop-filter:blur(14px);
@@ -633,17 +632,24 @@ cite{display:block;margin-top:8px;font-weight:700;color:var(--dark-wood)}
   border-bottom:1px solid rgba(0,0,0,0.08);
   box-shadow:0 4px 20px rgba(0,0,0,0.06);
 }
-.page-boutique main{
-  overflow:visible;
+.category-nav-wrap.is-fixed{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:70;
 }
-.page-boutique .shop-hero + .category-nav-wrap{
-  margin-top:0;
+#category-nav-placeholder{
+  display:none;
+  width:100%;
 }
 body.cart-open .category-nav-wrap{
   visibility:hidden;
   pointer-events:none;
 }
-#category-nav-placeholder{display:none!important}
+.page-boutique main{
+  overflow:visible;
+}
 .category-nav-bar{
   display:flex;
   align-items:center;
